@@ -1145,6 +1145,14 @@ int
 		BATT_STATUS_SYSFS = MTK_BATT_STATUS_SYSFS;
 		fxpIsUSBPlugged   = &sysfs_is_usb_plugged;
 		LOG(LOG_INFO, "Using the MTK battery status sysfs entry to handle cable sensing");
+
+		// FW 6.0 dropped the bd71827_bat power supply in favor of a generic battery one
+		if (access(MTK_BATT_STATUS_SYSFS, F_OK) != 0 && access(MTK_FW6_BATT_STATUS_SYSFS, F_OK) == 0) {
+			BATT_CAP_SYSFS     = MTK_FW6_BATT_CAP_SYSFS;
+			CHARGER_TYPE_SYSFS = MTK_FW6_CHARGER_TYPE_SYSFS;
+			BATT_STATUS_SYSFS  = MTK_FW6_BATT_STATUS_SYSFS;
+			LOG(LOG_INFO, "Using the generic battery power supply sysfs entries (FW 6.0+)");
+		}
 	} else if (ctx.fbink_state.is_sunxi) {
 		BATT_CAP_SYSFS     = SUNXI_BATT_CAP_SYSFS;
 		CHARGER_TYPE_SYSFS = SUNXI_CHARGER_TYPE_SYSFS;

@@ -138,6 +138,10 @@ bool (*fxpIsUSBPlugged)(int, bool) = NULL;
 // Finally, we're also starting to see more standard stuff... (e.g., on Mk. 10)
 #define STD_CHARGER_TYPE_SYSFS   "/sys/class/power_supply/ac/device/charger_type"
 #define MTK_CHARGER_TYPE_SYSFS   "/sys/class/power_supply/bd71827_bat/charger_type"
+// FW 6.0 renamed the bd71827 power supplies to the generic "battery" & "ac"
+#define MTK_FW6_BATT_CAP_SYSFS     "/sys/class/power_supply/battery/capacity"
+#define MTK_FW6_BATT_STATUS_SYSFS  "/sys/class/power_supply/battery/status"
+#define MTK_FW6_CHARGER_TYPE_SYSFS "/sys/class/power_supply/battery/charger_type"
 // For ref., on mainline w/ @akemnade's driver: /sys/class/power_supply/rn5t618-usb/usb_type
 const char* CHARGER_TYPE_SYSFS = NULL;
 // For the weird standalone USB-C controller found on sunxi & Mk. 9...
